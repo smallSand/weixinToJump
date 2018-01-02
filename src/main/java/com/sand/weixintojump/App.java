@@ -37,30 +37,50 @@ public class App
 		
 		System.out.println("棋子坐标: " + ball_x + " "+ ball_y);
 		//下一个方块坐标
-		int block_X = 0; 
+		int block_x = 0; 
 		int block_y = 0;
 		
 		out : for(int y = 300 ; y < HEIGHT - 1 ; y++){
 			for(int x = 0 ; x < WIDTH -1 ; x++){
 				rgb = toRgbArray(image.getRGB(x, y));
 				if(rgb[0] == 100 && rgb[1] == 149 && rgb[2] == 105){ //绿色方块
-					block_X = x + 1;
-					block_y = y + 130;
+					System.out.println("接触点坐标: " + x + " "+ y);
+					block_x = x;
+					block_y = y;
+					while(true){
+						block_x = block_x + 1;
+						if(!isSameColar(toRgbArray(image.getRGB(x, y)), toRgbArray(image.getRGB(block_x, block_y)))){
+							break;
+						}
+					}
+					System.out.println("中点坐标"  + (block_x + x)/2 +" " + block_y);
 					break out;
 				}
 				else if(rgb[0] == 246 && rgb[1] == 246 && rgb[2] == 246){//白色圆桌
-					block_X = x + 11;
-					block_y = y + 74;
+					System.out.println("接触点坐标: " + x + " "+ y);
+					block_x = x;
+					block_y = y;
+					while(true){
+						block_x = block_x + 1;
+						if(!isSameColar(toRgbArray(image.getRGB(x, y)), toRgbArray(image.getRGB(block_x, block_y)))){
+							break;
+						}
+					}
+					System.out.println("中点坐标"  + (block_x + x)/2 +" " + block_y);
 					break out;
 				}
+				
+				
 			}
 		}
-		System.out.println("下一个方块坐标: " + block_X + " "+ block_y);
+		System.out.println("下一个方块坐标: " + block_x + " "+ block_y);
 		
 		//计算距离
-		double length = Math.sqrt(Math.pow(Math.abs(block_X - ball_x), 2) 
+		double length = Math.sqrt(Math.pow(Math.abs(block_x - ball_x), 2) 
 				+ Math.pow(Math.abs(block_y - ball_y), 2));
 		System.out.println(length);
+		
+		System.out.println(isSameColar(new int[]{100,149,105}, new int[]{100, 149,105}));
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -73,5 +93,12 @@ public class App
         rgb[1] = (pixel & 0xff00) >> 8;  
         rgb[2] = (pixel & 0xff); 
     	return rgb;
+    }
+    //距离小于10
+    private static boolean isSameColar(int[] rgb1, int[] rgb2){
+    	double length = Math.sqrt(Math.pow(Math.abs(rgb1[0] - rgb2[0]), 2) 
+				+ Math.pow(Math.abs(rgb1[1] - rgb2[1]), 2)
+				+ Math.pow(Math.abs(rgb1[2] - rgb2[2]), 2));
+    	return length < 10;
     }
 }
