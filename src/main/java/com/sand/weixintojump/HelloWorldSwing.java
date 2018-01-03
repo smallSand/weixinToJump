@@ -28,12 +28,11 @@ public class HelloWorldSwing {
 			Runtime.getRuntime().exec("adb shell screencap -p /sdcard/screenshot_" + timestamp +".png");
 			Thread.sleep(3000);
 			Runtime.getRuntime().exec("adb pull /sdcard/screenshot_" + timestamp +".png f:/screenshot.png");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
         ImageIcon bg=new ImageIcon("F:/screenshot.png");  
-        
         final JLabel label=new JLabel(bg);  
         bg.setImage(bg.getImage().getScaledInstance(WIDTH, HEIGHT,Image.SCALE_DEFAULT));
         label.setBounds(0,0, WIDTH, HEIGHT);
@@ -45,14 +44,14 @@ public class HelloWorldSwing {
 				double length = App.calLength(e.getX(), e.getY());
 				System.out.println("距离 ：" + length);
 				try {
-					Runtime.getRuntime().exec("adb shell input swipe 300 500 300 500 " + Math.round(length * 5.35));
-					System.out.println("系数 :" +  Math.round(length * 5.35));
+					Runtime.getRuntime().exec("adb shell input swipe 300 500 300 500 " + Math.round(length * 4.25));
+					System.out.println("系数 :" +  Math.round(length * 4.25));
 					long timestamp = System.currentTimeMillis();
-					Thread.sleep(3000);
+					Thread.sleep(5000);
 					Runtime.getRuntime().exec("adb shell screencap -p /sdcard/screenshot_" + timestamp +".png");
 					Thread.sleep(3000);
 					Runtime.getRuntime().exec("adb pull /sdcard/screenshot_" + timestamp +".png f:/screenshot.png");
-					Thread.sleep(1000);
+					Thread.sleep(500);
 					ImageIcon bg=new ImageIcon("F:/screenshot.png");
 					bg.setImage(bg.getImage().getScaledInstance(WIDTH, HEIGHT,Image.SCALE_DEFAULT));
 					label.setIcon(bg);

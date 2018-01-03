@@ -1,7 +1,9 @@
 package com.sand.weixintojump;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -105,8 +107,8 @@ public class App {
 			// 棋子坐标
 			int ball_x = 0;
 			int ball_y = 0;
-			out: for (int y = 640; y > 0; y--) {
-				for (int x = 0; x < 360 - 1; x++) {
+			out: for (int y = 1280; y > 0; y--) {
+				for (int x = 0; x < 1080 - 1; x++) {
 					rgb = toRgbArray(image.getRGB(x, y));
 					if (rgb[0] == 54 && rgb[1] == 58 && rgb[2] == 99) {
 						ball_x = x + 8;
@@ -115,9 +117,15 @@ public class App {
 					}
 				}
 			}
-			System.out.println("棋子坐标: " + ball_x / 3 + " " + ball_y / 3);
+			double x = (double) ball_x / 3;
+			double y = (double)  ball_y / 3;
+			
+			double x1 = (double)  block_x;
+			double y1 = (double)  block_y;
+			System.out.println("棋子坐标: " + x + " " + y);
+			System.out.println("点击坐标: " + x1 + " " + y1);
 			// 计算距离
-			length = Math.sqrt(Math.pow(Math.abs(block_x / 3 - ball_x / 3), 2) + Math.pow(Math.abs(block_y / 3 - ball_y / 3), 2));
+			length = Math.sqrt(Math.pow(Math.abs(x - x1), 2) + Math.pow(Math.abs(y - y1), 2));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
