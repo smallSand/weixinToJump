@@ -18,7 +18,7 @@ public class App {
 
 	public static void main(String[] args) {
 		try {
-			BufferedImage image = ImageIO.read(new File("F:/screenshot.png"));
+			BufferedImage image = ImageIO.read(new File("E:/screenshot.png"));
 			int[] rgb = new int[3];
 
 			// 棋子坐标
@@ -102,7 +102,7 @@ public class App {
 	public static double calLength(int block_x, int block_y) {
 		double length = 0;
 		try {
-			BufferedImage image = ImageIO.read(new File("F:/screenshot.png"));
+			BufferedImage image = ImageIO.read(new File("E:/screenshot.png"));
 			int[] rgb = new int[3];
 			// 棋子坐标
 			int ball_x = 0;
