@@ -9,8 +9,8 @@ import java.io.IOException;
 import javax.swing.*;
 public class HelloWorldSwing {
 	
-	private static final int HEIGHT = 1920/3;//640
-	private static final int WIDTH = 1080/3; //360
+	private static final int HEIGHT = 1280/2;//640
+	private static final int WIDTH = 720/2; //360
     /**{
      * 创建并显示GUI。出于线程安全的考虑，
      * 这个方法在事件调用线程中调用。
@@ -27,7 +27,7 @@ public class HelloWorldSwing {
 		try {
 			Process p = Runtime.getRuntime().exec("adb shell screencap -p /sdcard/screenshot_" + timestamp +".png");
 			p.waitFor();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			Runtime.getRuntime().exec("adb pull /sdcard/screenshot_" + timestamp +".png E:/screenshot.png");
 		} catch (Exception e2) {
 		}

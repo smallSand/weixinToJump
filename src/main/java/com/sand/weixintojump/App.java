@@ -107,18 +107,18 @@ public class App {
 			// 棋子坐标
 			int ball_x = 0;
 			int ball_y = 0;
-			out: for (int y = 1280; y > 0; y--) {
-				for (int x = 0; x < 1080 - 1; x++) {
+			out: for (int y = 1000; y > 0; y--) {
+				for (int x = 0; x < 720 - 1; x++) {
 					rgb = toRgbArray(image.getRGB(x, y));
 					if (rgb[0] == 54 && rgb[1] == 58 && rgb[2] == 99) {
-						ball_x = x + 8;
-						ball_y = y - 23;
+						ball_x = x + 5;
+						ball_y = y - 15;
 						break out;
 					}
 				}
 			}
-			double x = (double) ball_x / 3;
-			double y = (double)  ball_y / 3;
+			double x = (double) ball_x / 2;
+			double y = (double)  ball_y / 2;
 			
 			double x1 = (double)  block_x;
 			double y1 = (double)  block_y;
