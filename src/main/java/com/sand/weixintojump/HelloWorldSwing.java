@@ -1,10 +1,8 @@
 package com.sand.weixintojump;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
+import java.util.Random;
 
 import javax.swing.*;
 public class HelloWorldSwing {
@@ -28,7 +26,8 @@ public class HelloWorldSwing {
 			Process p = Runtime.getRuntime().exec("adb shell screencap -p /sdcard/screenshot_" + timestamp +".png");
 			p.waitFor();
 			Thread.sleep(1000);
-			Runtime.getRuntime().exec("adb pull /sdcard/screenshot_" + timestamp +".png E:/screenshot.png");
+			Process p1 = Runtime.getRuntime().exec("adb pull /sdcard/screenshot_" + timestamp +".png E:/screenshot.png");
+			p1.waitFor();
 		} catch (Exception e2) {
 		}
         ImageIcon bg=new ImageIcon("E:/screenshot.png");  
@@ -43,7 +42,15 @@ public class HelloWorldSwing {
 				double length = App.calLength(e.getX(), e.getY());
 				System.out.println("距离 ：" + length);
 				try {
-					Process p = Runtime.getRuntime().exec("adb shell input swipe 300 500 300 500 " + Math.round(length * 4.25));
+					int max=500;
+			        int min=300;
+			        Random random = new Random();
+			        int x = random.nextInt(max)%(max-min+1) + min;
+			        int y = random.nextInt(max)%(max-min+1) + min;
+			        StringBuilder s = new StringBuilder();
+			        s.append(x + " ").append(y + " ").append(x + " ").append(y + " ");
+			        System.out.println("exe adb shell input swipe " +s+  Math.round(length * 4.25));
+					Process p = Runtime.getRuntime().exec("adb shell input swipe " +s+  Math.round(length * 4.25));
 					System.out.println("系数 :" +  Math.round(length * 4.25));
 					long timestamp = System.currentTimeMillis();
 					p.waitFor();
